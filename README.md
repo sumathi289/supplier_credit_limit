@@ -1,41 +1,35 @@
-### Supplier Credit Limit
+# Supplier Credit Limit
 
-Supplier Credit Limit implementation for ERPNext
+Supplier Credit Limit implementation for ERPNext.
 
-### Installation
+## Overview
 
-You can install this app using the [bench](https://github.com/frappe/bench) CLI:
+ERPNext provides built-in credit limit validation for Customers, but it does not
+enforce credit limits for Suppliers by default.
+
+This custom app adds Supplier Credit Limit validation during Purchase Order
+submission to prevent exceeding the allowed credit limit for a supplier.
+
+## How It Works
+
+- Credit limit is maintained per Supplier and Company
+- Validation is triggered on Purchase Order submission
+- Supplier outstanding amount is calculated using GL Entry
+- Current Purchase Order amount is added to outstanding
+- If the credit limit is exceeded, submission is blocked with an error
+
+## Technical Implementation
+
+- Validation logic is implemented in `supplier_credit_limit/api.py`
+- Event hook is registered in `supplier_credit_limit/hooks.py`
+- Purchase Order `on_submit` event is used for validation
+
+## Installation
 
 ```bash
 cd $PATH_TO_YOUR_BENCH
-bench get-app $URL_OF_THIS_REPO --branch develop
+bench get-app https://github.com/sumathi289/supplier_credit_limit.git --branch develop
 bench install-app supplier_credit_limit
+
 ```
 
-### Contributing
-
-This app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
-
-```bash
-cd apps/supplier_credit_limit
-pre-commit install
-```
-
-Pre-commit is configured to use the following tools for checking and formatting your code:
-
-- ruff
-- eslint
-- prettier
-- pyupgrade
-
-### CI
-
-This app can use GitHub Actions for CI. The following workflows are configured:
-
-- CI: Installs this app and runs unit tests on every push to `develop` branch.
-- Linters: Runs [Frappe Semgrep Rules](https://github.com/frappe/semgrep-rules) and [pip-audit](https://pypi.org/project/pip-audit/) on every pull request.
-
-
-### License
-
-mit
