@@ -249,8 +249,10 @@ app_license = "mit"
 
 doc_events = {
     "Purchase Order": {
-        "on_submit": "supplier_credit_limit.api.validate_supplier_credit_limit"
+        "before_submit": "supplier_credit_limit.api.validate_supplier_credit_limit"
     }
 }
+
+
 
 
