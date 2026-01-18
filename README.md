@@ -42,59 +42,75 @@ bench restart
 
 ```
 
-Sample Supplier Setup
-###########################
-Supplier: ABC Traders
-Company: My Company
-Credit Limit: 50,000
-Bypass: No
+## Sample Supplier Setup
 
-Supplier: XYZ Suppliers
-Company: My Company
-Credit Limit: 1,00,000
-Bypass: No
+Supplier: ABC Traders  
+Company: My Company  
+Credit Limit: 50,000  
+Bypass: No  
 
-Supplier: Trusted Vendor
-Company: My Company
-Credit Limit: 25,000
-Bypass: Yes
+---
 
-Supplier: Smart Phone Suppliers
-Company: My Company
-Credit Limit: Not Configured
-###########################
+Supplier: XYZ Suppliers  
+Company: My Company  
+Credit Limit: 1,00,000  
+Bypass: No  
 
-Test Cases
-Case 1: Credit Limit Exceeded ❌
+---
 
-Supplier: ABC Traders
-Credit Limit: 50,000
-Existing Purchase Order: 45,000
-New Purchase Order: 15,000
-Total Exposure: 60,000 > 50,000
-Result: Purchase Order submission blocked with
-"Credit Limit Crossed" error
+Supplier: Trusted Vendor  
+Company: My Company  
+Credit Limit: 25,000  
+Bypass: Yes  
 
+---
 
-Case 2: Under Credit Limit ✅
-Supplier: XYZ Suppliers
-Credit Limit: 1,00,000
-Purchase Orders: 95,000 + 3,000
-Total Exposure: 98,000 < 1,00,000
-Result: Purchase Orders submitted successfully
+Supplier: Smart Phone Suppliers  
+Company: My Company  
+Credit Limit: Not Configured  
 
+---
 
+## Test Cases
 
-Case 3: Bypass Enabled ✅
-Supplier: Trusted Vendor
-Credit Limit: 25,000
-Bypass Credit Limit Check: Enabled
-Purchase Orders: 25,000 + 10,000
-Result: Purchase Order allowed due to bypass setting
+### Case 1: Credit Limit Exceeded ❌
 
+Supplier: ABC Traders  
+Credit Limit: 50,000  
+Existing Purchase Order: 45,000  
+New Purchase Order: 15,000  
+Total Exposure: 60,000 > 50,000  
 
+Result: Purchase Order submission blocked with  
+**"Credit Limit Crossed"** error  
 
-Case 4: No Credit Limit Configured ✅
-Supplier: Smart Phone Suppliers
-Credit Limit: Not configured
-Result: Purchase Order allowed without validation
+---
+
+### Case 2: Under Credit Limit ✅
+
+Supplier: XYZ Suppliers  
+Credit Limit: 1,00,000  
+Purchase Orders: 95,000 + 3,000  
+Total Exposure: 98,000 < 1,00,000  
+
+Result: Purchase Orders submitted successfully  
+
+---
+
+### Case 3: Bypass Enabled ✅
+
+Supplier: Trusted Vendor  
+Credit Limit: 25,000  
+Bypass Credit Limit Check: Enabled  
+Purchase Orders: 25,000 + 10,000  
+
+Result: Purchase Order allowed due to bypass setting  
+
+---
+
+### Case 4: No Credit Limit Configured ✅
+
+Supplier: Smart Phone Suppliers  
+Credit Limit: Not configured  
+
+Result: Purchase Order allowed without validation  
